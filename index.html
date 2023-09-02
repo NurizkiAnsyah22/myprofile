@@ -30,7 +30,10 @@
   </head>
 
   <body>
+    <button id="toggleLanguage" onclick="toggleLanguage()">ENG</button>
+
     <!-- ======= Mobile nav toggle button ======= -->
+    
     <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
     <!-- ======= Header ======= -->
@@ -492,5 +495,50 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Objek yang berisi teks dalam dua bahasa
+      const languageData = {
+        id: {
+          home: "Beranda",
+          about: "Tentang",
+          portfolio: "Portofolio",
+          contact: "Kontak",
+          downloadCV: "Unduh CV",
+          toggleLabel: "ID", // Label tombol bahasa untuk bahasa Indonesia
+        },
+        en: {
+          home: "Home",
+          about: "About",
+          portfolio: "Portfolio",
+          contact: "Contact",
+          downloadCV: "Download CV",
+          toggleLabel: "ENG", // Label tombol bahasa untuk bahasa Inggris
+        },
+      };
+    
+      // Fungsi untuk mengubah bahasa
+      function toggleLanguage() {
+        const currentLanguage = document.documentElement.lang;
+        const newLanguage = currentLanguage === "id" ? "en" : "id"; // Toggle antara bahasa Indonesia (id) dan bahasa Inggris (en)
+    
+        // Setel atribut lang pada elemen HTML untuk mengganti bahasa
+        document.documentElement.lang = newLanguage;
+    
+        // Ambil tombol toggle bahasa
+        const toggleButton = document.getElementById("toggleLanguage");
+        
+        // Ubah label tombol sesuai dengan bahasa yang aktif
+        toggleButton.textContent = languageData[newLanguage].toggleLabel;
+    
+        // Ambil semua elemen dengan atribut data-translate
+        const elementsToTranslate = document.querySelectorAll("[data-translate]");
+    
+        // Ubah teks di elemen-elemen tersebut sesuai dengan bahasa yang dipilih
+        elementsToTranslate.forEach((element) => {
+          const key = element.getAttribute("data-translate");
+          element.textContent = languageData[newLanguage][key];
+        });
+      }
+    </script>
   </body>
 </html>
